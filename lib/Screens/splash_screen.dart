@@ -10,7 +10,7 @@ class SplashScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     // time out after 3 secs and shows the home screen of the app.
     Timer(const Duration(seconds: 3), () {
-      Navigator.of(context).pushReplacementNamed('/home');
+      Navigator.of(context).pushNamedAndRemoveUntil('/home', (route) => false);
     });
 
     // contents of the splash screen.
