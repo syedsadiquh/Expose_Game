@@ -9,9 +9,9 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // time out after 3 secs and shows the home screen of the app.
-    // Timer(const Duration(seconds: 3), () {
-    //   Navigator.of(context).pushReplacementNamed('/home');
-    // });
+    Timer(const Duration(seconds: 3), () {
+      Navigator.of(context).pushReplacementNamed('/home');
+    });
 
     // contents of the splash screen.
     return MaterialApp(
