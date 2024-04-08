@@ -1,3 +1,4 @@
+import 'package:expose_game/Screens/game_screen.dart';
 import 'package:expose_game/Screens/home_screen.dart';
 import 'package:expose_game/Screens/splash_screen.dart';
 import 'package:flutter/material.dart';
@@ -39,6 +40,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/splash': (context) => const SplashScreen(),
         '/home': (context) => HomeScreen(),
+        '/play':(context) => GameScreen(),
       },
     );
   }
