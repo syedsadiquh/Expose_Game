@@ -1,4 +1,6 @@
+import 'package:expose_game/Provider/game.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -7,6 +9,8 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     MediaQueryData mediaQueryData = MediaQuery.of(context);
+    final game = Provider.of<Game>(context, listen: false);
+    final hiScore = game.hiScore;
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
@@ -30,13 +34,25 @@ class HomeScreen extends StatelessWidget {
             SizedBox(
               height: 20,
               width: mediaQueryData.size.width - 50,
-              child: const Text(
-                "Hi Score - 00",
-                textAlign: TextAlign.right,
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 15,
-                ),
+              child: Row(
+                children: [
+                  const Spacer(),
+                  const Text(
+                    "Hi Score - ",
+                    textAlign: TextAlign.right,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15,
+                    ),
+                  ),
+                  Text(
+                    hiScore.toString(),
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15,
+                    ),
+                  )
+                ],
               ),
             ),
             Image.asset(
@@ -48,9 +64,7 @@ class HomeScreen extends StatelessWidget {
               child: MaterialButton(
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15)),
-                onPressed: () => {
-                  Navigator.of(context).pushNamed('/play')
-                },
+                onPressed: () => {Navigator.of(context).pushNamed('/play')},
                 child: Container(
                   decoration: BoxDecoration(
                       gradient: const LinearGradient(
