@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:expose_game/Provider/board_element.dart';
 import 'package:flutter/material.dart';
 
 class Game with ChangeNotifier {
@@ -27,7 +28,7 @@ class Game with ChangeNotifier {
     "cyan": "black"
   };
 
-  static var _board; // TODO: make it final
+  static List<List<BoardElement>>? _board; // TODO: make it final
   static int? parity;
   static int pairCount = 0;
   static int chanceLeft =
@@ -39,15 +40,18 @@ class Game with ChangeNotifier {
 
   Game(int n) {
     // Init the 2d array with some initial value and setting growable = false.
-    _board = List.generate(n + 1, (i) => List.filled(n + 1, 0, growable: false), growable: false);
+    _board = List<List>.generate(n,
+            (i) => List<BoardElement>.generate(n, (index) => BoardElement(0), growable: false),
+            growable: false)
+        .cast<List<BoardElement>>();
     createBoard(n); // TODO: later on ... implement the difficulty of game.
   }
 
   static void createBoard(int n) {
     for (var i = 0; i < n; i++) {
       for (var j = 0; j < n; j++) {
-        _board[i][j] =
-            Random().nextInt(9) + 1; // Generate random number between 1 to 9
+        _board![i][j] = BoardElement(
+            Random().nextInt(9) + 1); // Generate random number between 1 to 9
       }
     }
   }
@@ -73,7 +77,7 @@ class Game with ChangeNotifier {
   }
 
   int getBoardValue(int i, int j) {
-    return _board[i][j];
+    return _board![i][j].tileNumber;
   }
 
   int get score {
@@ -82,5 +86,13 @@ class Game with ChangeNotifier {
 
   int get hiScore {
     return highScore;
+  }
+
+  int get getGrids {
+    return _board!.length;
+  }
+
+  List<BoardElement> get getBoard {
+    return _board!.expand((i) => i).toList();
   }
 }
