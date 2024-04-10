@@ -1,3 +1,4 @@
+import 'package:expose_game/Widgets/game_grid.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -51,6 +52,9 @@ class _GameScreenState extends State<GameScreen> {
               ],
             ),
             // Game Grid below
+            SizedBox(
+              height: MediaQuery.of(context).size.height,    // TODO: pixels overlflown by 130px 
+              child: GameGrid()),
           ],
         ),
       ),
