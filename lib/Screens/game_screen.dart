@@ -32,7 +32,7 @@ class _GameScreenState extends State<GameScreen> {
             Row(
               children: <Widget>[
                 const SizedBox(
-                  height: 50,
+                  height: 40,
                   width: 25,
                 ),
                 const Text(
@@ -49,12 +49,15 @@ class _GameScreenState extends State<GameScreen> {
                     fontSize: 18,
                   ),
                 ),
+                const SizedBox(
+                  height: 50,
+                )
               ],
             ),
             // Game Grid below
             SizedBox(
-              height: MediaQuery.of(context).size.height,    // TODO: pixels overlflown by 130px 
-              child: GameGrid()),
+                height: MediaQuery.of(context).size.height * 0.7,
+                child: const GameGrid()),
           ],
         ),
       ),

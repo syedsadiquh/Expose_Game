@@ -15,20 +15,33 @@ class _GameGridState extends State<GameGrid> {
   @override
   Widget build(BuildContext context) {
     var gamedata = Provider.of<Game>(context, listen: true);
-    var gameBoard = gamedata.getBoard;
     var gameGrids = gamedata.getGrids;
-    return GridView.builder(
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 3,
-      ),
-      itemCount: gameGrids * gameGrids,
-      itemBuilder: (context, index) {
-        return ChangeNotifierProvider.value(
-          value: gameBoard[index],
-          child: gameBoard[index].clicked ? NumberTile() : ClickTile(),
-        );
+    return GestureDetector(
+      onTap: () {
+        setState(() {});
       },
+      child: GridView.builder(
+        padding: const EdgeInsets.all(20),
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          // TODO: Change this based on Difficulty... Can't put a dynamic value/variable in it.
+          crossAxisCount: 3,
+          crossAxisSpacing: 15,
+          mainAxisSpacing: 15,
+        ),
+        itemCount: gameGrids * gameGrids,
+        itemBuilder: (context, index) {
+          return ChangeNotifierProvider.value(
+            value: gamedata.getBoardElement(index),
+            child: gamedata.getBoardElement(index).clicked
+                ? NumberTile(index)
+                : ClickTile(index, updateWidget),
+          );
+        },
+      ),
     );
-    ;
+  }
+
+  void updateWidget() {
+    setState(() {});
   }
 }

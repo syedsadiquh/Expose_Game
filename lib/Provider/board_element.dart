@@ -17,8 +17,13 @@ class BoardElement with ChangeNotifier {
     return clicked;
   }
 
-  set clickedStatus(bool s) {
-    clicked = s;
+  // set setClickedStatus(bool s) {
+  //   clicked = s;
+  //   notifyListeners();
+  // }
+
+  void setClickedStatus(bool bool) {
+    clicked = bool;
     notifyListeners();
   }
 }

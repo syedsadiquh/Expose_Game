@@ -5,16 +5,16 @@ import 'package:flutter/material.dart';
 
 class Game with ChangeNotifier {
   // TODO: implement the coloring to each tile.
-  final Map<int, String> colors = {
-    1: "red",
-    2: "blue",
-    3: "green",
-    4: "yellow",
-    5: "orange",
-    6: "purple",
-    7: "pink",
-    8: "brown",
-    9: "cyan"
+  final Map<int, MaterialColor> colors = {
+    0: Colors.red,
+    1: Colors.blue,
+    2: Colors.green,
+    3: Colors.yellow,
+    4: Colors.orange,
+    5: Colors.purple,
+    6: Colors.pink,
+    7: Colors.brown,
+    8: Colors.cyan,
   };
   final Map<String, String> contrastingColors = {
     "red": "white",
@@ -40,8 +40,10 @@ class Game with ChangeNotifier {
 
   Game(int n) {
     // Init the 2d array with some initial value and setting growable = false.
-    _board = List<List>.generate(n,
-            (i) => List<BoardElement>.generate(n, (index) => BoardElement(0), growable: false),
+    _board = List<List>.generate(
+            n,
+            (i) => List<BoardElement>.generate(n, (index) => BoardElement(0),
+                growable: false),
             growable: false)
         .cast<List<BoardElement>>();
     createBoard(n); // TODO: later on ... implement the difficulty of game.
@@ -56,8 +58,8 @@ class Game with ChangeNotifier {
     }
   }
 
-  int checkStatus(int i, int j) {
-    var value = getBoardValue(i, j);
+  int checkStatus(int i) {
+    var value = getBoardElement(i).tileNumber;
 
     if (pairCount % 2 == 0) {
       parity = value % 2;
@@ -76,8 +78,8 @@ class Game with ChangeNotifier {
     return 1; // Returns 1 to indicate the player can go on without any issues.
   }
 
-  int getBoardValue(int i, int j) {
-    return _board![i][j].tileNumber;
+  BoardElement getBoardElement(int i) {
+    return (_board!.expand((i) => i).toList())[i];
   }
 
   int get score {

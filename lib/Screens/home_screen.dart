@@ -9,7 +9,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     MediaQueryData mediaQueryData = MediaQuery.of(context);
-    final game = Provider.of<Game>(context, listen: false);
+    final game = Provider.of<Game>(context, listen: true);
     final hiScore = game.hiScore;
     return MaterialApp(
       home: Scaffold(
