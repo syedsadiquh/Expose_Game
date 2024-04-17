@@ -16,7 +16,7 @@ class HomeScreen extends StatelessWidget {
         appBar: AppBar(
           title: GradientText("Expose It!",
               style: const TextStyle(
-                fontSize: 22.5,
+                fontSize: 25.5,
                 fontFamily: "Roboto Sans",
                 fontWeight: FontWeight.bold,
               ),
@@ -38,18 +38,18 @@ class HomeScreen extends StatelessWidget {
                 children: [
                   const Spacer(),
                   const Text(
-                    "Hi Score - ",
+                    "Hi Score :",
                     textAlign: TextAlign.right,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: 15,
+                      fontSize: 16,
                     ),
                   ),
                   Text(
-                    hiScore.toString(),
+                    " $hiScore",
                     style: const TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: 15,
+                      fontSize: 16,
                     ),
                   )
                 ],
@@ -79,7 +79,7 @@ class HomeScreen extends StatelessWidget {
                         EdgeInsets.symmetric(vertical: 12.0, horizontal: 20),
                     child: Text(
                       "Lets Begin!",
-                      style: TextStyle(color: Colors.white),
+                      style: TextStyle(color: Colors.white, fontSize: 18),
                     ),
                   ),
                 ),

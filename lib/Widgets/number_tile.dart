@@ -21,7 +21,7 @@ class NumberTile extends StatelessWidget {
       child: Center(
           child: Text(
         tileNumber.toString(),
-        style: TextStyle(fontSize: 30),
+        style: const TextStyle(fontSize: 30),
       )),
     );
   }

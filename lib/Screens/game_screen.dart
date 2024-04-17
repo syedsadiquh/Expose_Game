@@ -16,6 +16,7 @@ class _GameScreenState extends State<GameScreen> {
   Widget build(BuildContext context) {
     var game = Provider.of<Game>(context, listen: true);
     var currScore = game.score;
+    var livesLeft = game.getLives;
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -32,7 +33,7 @@ class _GameScreenState extends State<GameScreen> {
             Row(
               children: <Widget>[
                 const SizedBox(
-                  height: 40,
+                  height: 50,
                   width: 25,
                 ),
                 const Text(
@@ -49,15 +50,60 @@ class _GameScreenState extends State<GameScreen> {
                     fontSize: 18,
                   ),
                 ),
+                const Spacer(),
+                const Text(
+                  "Lives Left : ",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18,
+                  ),
+                ),
+                Text(
+                  livesLeft.toString(),
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18,
+                  ),
+                ),
                 const SizedBox(
                   height: 50,
-                )
+                  width: 25,
+                ),
               ],
             ),
             // Game Grid below
             SizedBox(
-                height: MediaQuery.of(context).size.height * 0.7,
-                child: const GameGrid()),
+              height: MediaQuery.of(context).size.height * 0.7,
+              child: const GameGrid(),
+            ),
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.02,
+            ),
+            // Restart button
+            MaterialButton(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15)),
+              onPressed: () {
+                game.restart();
+              },
+              child: Container(
+                decoration: BoxDecoration(
+                    gradient: const LinearGradient(
+                        begin: Alignment.bottomCenter,
+                        colors: [
+                          Colors.blue,
+                          Color.fromARGB(255, 158, 117, 247),
+                        ]),
+                    borderRadius: BorderRadius.circular(15)),
+                child: const Padding(
+                  padding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 20),
+                  child: Text(
+                    "Restart",
+                    style: TextStyle(color: Colors.white, fontSize: 16),
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
       ),

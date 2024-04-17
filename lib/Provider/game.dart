@@ -4,7 +4,6 @@ import 'package:expose_game/Provider/board_element.dart';
 import 'package:flutter/material.dart';
 
 class Game with ChangeNotifier {
-  // TODO: implement the coloring to each tile.
   final Map<int, MaterialColor> colors = {
     0: Colors.red,
     1: Colors.blue,
@@ -60,22 +59,39 @@ class Game with ChangeNotifier {
 
   int checkStatus(int i) {
     var value = getBoardElement(i).tileNumber;
-
+    var justChanged = false;
     if (pairCount % 2 == 0) {
       parity = value % 2;
     } else {
       if (value % 2 != parity) {
         chanceLeft -= 1;
+        justChanged = true;
+        notifyListeners();
       }
       if (chanceLeft <= 0) {
         return -1; // Returns -1 to indicate that the game is now over.
       } else if (chanceLeft == 1) {
+        if (!justChanged) {
+          currScore += 1;
+        }
         return 0; // Returns 0 to indicate that only one life is left.
       }
     }
     pairCount += 1;
     currScore += 1;
+    notifyListeners();
     return 1; // Returns 1 to indicate the player can go on without any issues.
+  }
+
+  bool didWon() {
+    var grids = getGrids;
+    for (int i = 0; i < (grids * grids); i++) {
+      var tempElement = getBoardElement(i);
+      if (!tempElement.clicked) {
+        return false;
+      }
+    }
+    return true;
   }
 
   BoardElement getBoardElement(int i) {
@@ -96,5 +112,22 @@ class Game with ChangeNotifier {
 
   List<BoardElement> get getBoard {
     return _board!.expand((i) => i).toList();
+  }
+
+  int get getLives {
+    return chanceLeft;
+  }
+
+  void setHiScore(int h) {
+    highScore = h;
+    notifyListeners();
+  }
+
+  void restart() {
+    currScore = 0;
+    createBoard(3);
+    pairCount = 0;
+    chanceLeft = 2;
+    notifyListeners();
   }
 }
