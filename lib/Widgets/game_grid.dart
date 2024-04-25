@@ -24,7 +24,7 @@ class _GameGridState extends State<GameGrid> {
         padding: const EdgeInsets.all(20),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           // TODO: Change this based on Difficulty... Can't put a dynamic value/variable in it.
-          crossAxisCount: 3,
+          crossAxisCount: 4,
           crossAxisSpacing: 15,
           mainAxisSpacing: 15,
         ),

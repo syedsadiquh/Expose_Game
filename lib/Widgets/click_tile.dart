@@ -48,7 +48,7 @@ class ClickTile extends StatelessWidget {
         ),
         child: const Center(
             child: Text(
-          "🫣",
+          "😁",
           style: TextStyle(fontSize: 30),
         )),
       ),

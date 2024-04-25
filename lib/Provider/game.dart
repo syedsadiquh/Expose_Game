@@ -14,24 +14,20 @@ class Game with ChangeNotifier {
     6: Colors.pink,
     7: Colors.brown,
     8: Colors.cyan,
-  };
-  final Map<String, String> contrastingColors = {
-    "red": "white",
-    "blue": "white",
-    "green": "white",
-    "yellow": "black",
-    "orange": "black",
-    "purple": "white",
-    "pink": "black",
-    "brown": "white",
-    "cyan": "black"
+    9: Colors.indigo,
+    10: Colors.lime,
+    11: Colors.teal,
+    12: Colors.amber,
+    13: Colors.deepOrange,
+    14: Colors.blueGrey,
+    15: Colors.lightBlue,
   };
 
   static List<List<BoardElement>>? _board; // TODO: make it final
   static int? parity;
   static int pairCount = 0;
   static int chanceLeft =
-      2; // TODO: later on chnage the number of available lives based on the difficulty level.
+      3; // TODO: later on chnage the number of available lives based on the difficulty level.
   // TODO: implement start, elapsed time and running time.
 
   int highScore = 0;
@@ -78,20 +74,19 @@ class Game with ChangeNotifier {
       }
     }
     pairCount += 1;
-    currScore += 1;
+    if (!justChanged) {
+      currScore += 1;
+    }
+    // currScore += 1;
     notifyListeners();
     return 1; // Returns 1 to indicate the player can go on without any issues.
   }
 
   bool didWon() {
-    var grids = getGrids;
-    for (int i = 0; i < (grids * grids); i++) {
-      var tempElement = getBoardElement(i);
-      if (!tempElement.clicked) {
-        return false;
-      }
+    if (currScore >= 8) {
+      return true;
     }
-    return true;
+    return false;
   }
 
   BoardElement getBoardElement(int i) {
@@ -124,10 +119,11 @@ class Game with ChangeNotifier {
   }
 
   void restart() {
+    //TODO: Also change these when implementing Difficultiy levels
     currScore = 0;
-    createBoard(3);
+    createBoard(4);
     pairCount = 0;
-    chanceLeft = 2;
+    chanceLeft = 3;
     notifyListeners();
   }
 }

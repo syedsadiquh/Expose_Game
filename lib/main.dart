@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    final Game gamedata = Game(3);
+    final Game gamedata = Game(4);
     return ChangeNotifierProvider<Game>(
       create: (_) => gamedata,
       child: MaterialApp(
